@@ -1,9 +1,9 @@
 name: Publish update
 
 on:
+  workflow_dispatch: {}
   push:
     branches: [main]
-    paths: ["latest.json"]
 
 permissions:
   contents: write
