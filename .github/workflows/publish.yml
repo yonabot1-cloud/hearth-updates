@@ -1,0 +1,25 @@
+name: Publish update
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V=$(jq -r .version latest.json)
+          gh release view "v$V" >/dev/null 2>&1 && exit 0
+          cp Hearth.apk "Hearth-$V.apk"
+          gh release create "v$V" "Hearth-$V.apk" --title "Hearth $V" --notes "Over-the-air update" --latest
