@@ -1,2 +1,3 @@
-# hearth-updates
-Hearth app updates (APK download shelf)
+# Hearth updates
+
+Download shelf for the Hearth wall-tablet app. The tablet checks the latest release here and updates itself.
